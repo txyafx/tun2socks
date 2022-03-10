@@ -90,11 +90,15 @@ func (h *tcpHandler) Handle(conn net.Conn, target *net.TCPAddr) error {
 	var auth = proxy.Auth{User: "user", Password: "passwd"}
 	dialer, err := proxy.SOCKS5("tcp", core.ParseTCPAddr(h.proxyHost, h.proxyPort).String(), &auth, nil)
 	if err != nil {
+		println("22222")
+		println(core.ParseTCPAddr(h.proxyHost, h.proxyPort).String())
 		return err
 	}
 
 	c, err := dialer.Dial(target.Network(), target.String())
 	if err != nil {
+		println("33333")
+		println(target.String())
 		return err
 	}
 
