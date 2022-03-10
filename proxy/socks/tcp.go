@@ -7,8 +7,8 @@ import (
 
 	"golang.org/x/net/proxy"
 
-	"github.com/eycorsican/go-tun2socks/common/log"
-	"github.com/eycorsican/go-tun2socks/core"
+	"github.com/txyafx/tun2socks/common/log"
+	"github.com/txyafx/tun2socks/core"
 )
 
 type tcpHandler struct {
@@ -86,7 +86,8 @@ func (h *tcpHandler) relay(lhs, rhs net.Conn) {
 }
 
 func (h *tcpHandler) Handle(conn net.Conn, target *net.TCPAddr) error {
-	dialer, err := proxy.SOCKS5("tcp", core.ParseTCPAddr(h.proxyHost, h.proxyPort).String(), nil, nil)
+	var auth = proxy.Auth{User: "user", Password: "passwd"}
+	dialer, err := proxy.SOCKS5("tcp", core.ParseTCPAddr(h.proxyHost, h.proxyPort).String(), &auth, nil)
 	if err != nil {
 		return err
 	}
