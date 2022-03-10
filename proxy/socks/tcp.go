@@ -86,6 +86,7 @@ func (h *tcpHandler) relay(lhs, rhs net.Conn) {
 }
 
 func (h *tcpHandler) Handle(conn net.Conn, target *net.TCPAddr) error {
+	println("111111111111111111111")
 	var auth = proxy.Auth{User: "user", Password: "passwd"}
 	dialer, err := proxy.SOCKS5("tcp", core.ParseTCPAddr(h.proxyHost, h.proxyPort).String(), &auth, nil)
 	if err != nil {
