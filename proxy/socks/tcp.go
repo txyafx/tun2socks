@@ -98,7 +98,7 @@ func (h *tcpHandler) Handle(conn net.Conn, target *net.TCPAddr) error {
 	c, err := dialer.Dial(target.Network(), target.String())
 	if err != nil {
 		println("33333")
-		println(err)
+		log.Errorf("connect failed: %v", err)
 
 		return err
 	}
